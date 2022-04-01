@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/public/css/bulma.min.css">
+</head>
+
+<body>
+
+    <section class="section content">
+        <div class="container">
+            <h1>A Form Tool for Transfer of Scores from SMC-type Scoresheet to SIMS Scoresheet</h1>
+            <div class="box">
+                <h2>Instructions...</h2>
+                <p>1. Generate the spreadsheet file from SIMS for the course (You may need to consult with Philip on
+                    this step)</p>
+                <p>2. You will notice that the file generated ends in a .xls and not .xlsx. This is a limitation. So,
+                    first open it in Excel and save as a normal .xlsx file</p>
+                <p>3. Proceed to select the above .xlsx file in form below without any modification</p>
+                <p>4. Also select in the field provided below, the equivalent SMC-type scoresheet for the course. Ensure
+                    that
+                    it contains
+                    raw values and not excel formulas in the Participation, CA1, CA2, CA3, CA4 and Exam columns, where
+                    applicable.</p>
+                <p>5. Confirm that you have selected both files above in the form and then click the Submit button</p>
+                <p>6. MAGIC: Your two files will be uploaded and almost immediately, a file will be downloaded to your
+                    system. That is your Excel sheet containing your data for upload to SIMS</p>
+                <p>7. In case SIMS cannot handle .xlsx, first open the file in Excel and save as the .xls equivalent (a
+                    downgrade)</p>
+                <p>8. Upload to SIMS (You may need to consult with Philip on this step)</p>
+            </div>
+
+            <div class="box">
+                <h2>The Upload Form ...</h2>
+                <form class="form-horizontal" enctype="multipart/form-data" method="Post" action="/">
+                    <fieldset>
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field box">
+                                    <label class="label" for="simsFile">SIMS Scoresheet File</label>
+                                    <div class="section">
+                                        <div class="control">
+                                            <label class="file-label">
+                                                <input class="file-input" type="file" name="simsFile"
+                                                    onchange="if (this.files.length > 0) document.getElementById('filename-simsFile').innerHTML = this.files[0].name;"
+                                                    required>
+                                                <span class="file-cta button is-success">
+                                                    <span class="file-label" id="filename-simsFile">
+                                                        Choose a file…
+                                                    </span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <p class="help is-info">Select here the scoresheet generated from SIMS and
+                                            prepared
+                                            as instructed above
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field box">
+                                    <label class="label" for="simsFile">SMC-type Scoresheet File</label>
+                                    <div class="section">
+                                        <div class="columns">
+                                            <div class="column">
+                                                <div class="control">
+                                                    <label class="radio">
+                                                        <input type="radio" name="program-option" value="undergraduate"
+                                                            checked onclick="
+                                                        document.getElementById('filename-smcMscFile').innerHTML ='Disabled! Select MSc above to enable';
+                                                        document.getElementById('filename-smcFile').innerHTML = 'Choose a file ...';
+                                                        document.getElementById('filename-smcMscFile-wrapper').classList.remove('is-success')
+                                                        document.getElementById('filename-smcFile-wrapper').classList.add('is-success')
+                                                        document.getElementById('smcFile').disabled=false;
+                                                        document.getElementById('smcMscFile').disabled=true;
+                                                        " autocomplete="off">
+                                                        Undergraduate
+                                                    </label>
+                                                    <label class="radio">
+                                                        <input type="radio" name="program-option" value="msc" onclick="
+                                                        document.getElementById('filename-smcFile').innerHTML = 'Disabled! Select Undergraduate above to enable';
+                                                        document.getElementById('filename-smcMscFile').innerHTML = 'Choose a file ...';
+                                                        document.getElementById('filename-smcMscFile-wrapper').classList.add('is-success')
+                                                        document.getElementById('filename-smcFile-wrapper').classList.remove('is-success')
+                                                        document.getElementById('smcFile').disabled=true;
+                                                        document.getElementById('smcMscFile').disabled=false;
+                                                        " autocomplete="off">
+                                                        MSc
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="columns">
+                                        <div class="column">
+                                            <div class="field box">
+
+                                                <div class="control">
+                                                    <label class="file-label">
+                                                        <input class="file-input" type="file" name="smcFile"
+                                                            id="smcFile"
+                                                            onchange="if (this.files.length > 0) document.getElementById('filename-smcFile').innerHTML = this.files[0].name;"
+                                                            onclick="
+                                                        document.getElementById('filename-smcMscFile').innerHTML ='Disabled! Select MSc above to enable';
+                                                        document.getElementById('filename-smcFile').innerHTML = 'Choose a file ...';
+                                                        document.getElementById('smcMscFile').disabled=true;
+                                                        document.getElementById('smcFile').disabled=false;
+                                                        ">
+
+                                                        <span id="filename-smcFile-wrapper" class="file-cta button is-success">
+
+                                                            <span class="file-label" id="filename-smcFile">
+                                                                Choose a file ...
+                                                            </span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                <p class="help is-info">Select here the equivalent completed SMC-type
+                                                    <span style="font-weight: bold;">Undergraduate</span> scoresheet
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                        <div class="column">
+                                            <div class="field box">
+
+                                                <div class="control">
+                                                    <label class="file-label">
+                                                        <input class="file-input" type="file" name="smcMscFile"
+                                                            id="smcMscFile" disabled
+                                                            onchange="if (this.files.length > 0) document.getElementById('filename-smcMscFile').innerHTML = this.files[0].name;"
+                                                            onclick="
+                                                        document.getElementById('filename-smcFile').innerHTML = 'Disabled! Select Undergraduate above to enable';
+                                                        document.getElementById('filename-smcMscFile').innerHTML = 'Choose a file ...';
+                                                        document.getElementById('smcFile').disabled=true;
+                                                        document.getElementById('smcMscFile').disabled=false;
+                                                        ">
+                                                        <span id="filename-smcMscFile-wrapper" class="file-cta button">
+
+                                                            <span class="file-label" id="filename-smcMscFile">
+                                                                Disabled! Select MSc above to enable
+                                                            </span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                <p class="help is-info">Select here the equivalent completed SMC-type
+                                                    <span style="font-weight: bold;">MSc</span> scoresheet
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Button -->
+                        <div class="field">
+                            <label class="label" for="Submit"></label>
+                            <div class="control">
+                                <button id="Submit" type="submit" name="Submit" class="button is-link">Submit</button>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
